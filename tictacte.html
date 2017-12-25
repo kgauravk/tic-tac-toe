@@ -25,6 +25,12 @@
 		<button  onclick="players()">Submit</button>
 	</form>
 </div>
+<div id="amatch" style="display: none;">
+	<p id="winner"></p>
+	Do you want to play again?<br>
+	<button onclick="location.reload()">YES</button>&nbsp;
+	<button onclick="window.close()">NO</button>
+</div>
 
 <div class="board" id="board" style="display: none;">
 	<p id="pturn"></p>
@@ -77,15 +83,36 @@
 
 	}
 
-	//function for checking straight win
-	function checkstr(){
+	//function for checking win
+	function check(c){
+		if(board[0]==c && board[1]==c && board[2]==c){
+			return true;
+		}
+		else if(board[3]==c && board[4]==c && board[5]==c){
+			return true;
+		}
+		else if(board[6]==c && board[7]==c && board[8]==c){
+			return true;
+		}
+		else if(board[0]==c && board[3]==c && board[6]==c){
+			return true;
+		}
+		else if(board[1]==c && board[4]==c && board[7]==c){
+			return true;
+		}
+		else if(board[2]==c && board[5]==c && board[8]==c){
+			return true;
+		}
+		else if(board[0]==c && board[4]==c && board[8]==c){
+			return true;
+		}
+		else if(board[2]==c && board[4]==c && board[6]==c){
+			return true;
+		}
 		return false;
+
 	}
 
-	//function for checking slant win
-	function checkslt(){
-		return false;
-	}
 
 	//function for checking and changing after each step
 	function changencheck(id){
@@ -101,13 +128,17 @@
 		board[idn]=pc[n];
 
 		//checking if that player is winning or not
-		if (checkstr(pc[n])||checkslt(pc[n])) {
+		if (check(pc[n])) {
+			document.getElementById("amatch").style.display="block";
+			document.getElementById("winner").innerHTML=p[n]+" won the match."
+			document.getElementById(id).innerHTML=pc[n];
 			return;
 		}
 
 		//changing element in box
 		document.getElementById(id).value=pc[n];
 		document.getElementById(id).innerHTML=pc[n];
+		n=(i+1)%2;
 		document.getElementById("pturn").innerHTML=p[n]+"'s"+"&nbsp;"+"TURN :"
 		i=i+1;
 
