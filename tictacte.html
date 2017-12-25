@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+	<meta charset="utf-8"/>
+	<TITLE>Tic-Tac-Toe By:Gaurav</TITLE>
+	<style type="text/css"></style>
+</HEAD>
+<div>
+<h1>Tic-Tac-Toe</h1>
+<h2>By:Gaurav</h2>
+</div>
+<div class="start" id="start">
+	<form>
+		<b>PLAYER 1</b> NAME:
+		<input type="text" id="p1" required>&nbsp;
+		  CHOICE:<select id="p1c">
+			<option value="X">X</option>
+			<option value="O">O</option>
+		</select><br>
+		<b>PLAYER 2</b> NAME:
+		<input type="text" id="p2" required>&nbsp;
+		CHOICE:<select id="p2c">
+			<option value="X">X</option>
+			<option value="O">O</option>
+		</select><br>
+		<button  onclick="players()">Submit</button>
+	</form>
+</div>
+
+<div class="board" id="board" style="display: none;">
+	<p id="pturn"></p>
+	<button class="b" onclick="changencheck(id)"></button>
+	<button class="b" onclick="changencheck(id)"></button>
+	<button class="b" onclick="changencheck(id)"></button><br>
+	<button class="b" onclick="changencheck(id)"></button>
+	<button class="b" onclick="changencheck(id)"></button>
+	<button class="b" onclick="changencheck(id)"></button><br>
+	<button class="b" onclick="changencheck(id)"></button>
+	<button class="b" onclick="changencheck(id)"></button>
+	<button class="b" onclick="changencheck(id)"></button><br>
+</div>
+
+<script type="text/javascript">
+	var p=[],pc=[],board=[];
+
+	//function fo printing board
+	function printboard(board){
+		var b=document.getElementsByClassName("b");
+		b[0].innerHTML=board[0];
+		b[1].innerHTML=board[1];
+		b[2].innerHTML=board[2];
+		b[3].innerHTML=board[3];
+		b[4].innerHTML=board[4];
+		b[5].innerHTML=board[5];
+		b[6].innerHTML=board[6];
+		b[7].innerHTML=board[7];
+		b[8].innerHTML=board[8];
+	}
+
+	//fuction or player,choices and other stuffs
+	function players(){
+		board=["&nbsp;","&nbsp;","&nbsp;","&nbsp;","&nbsp;","&nbsp;","&nbsp;","&nbsp;","&nbsp;"];
+
+		//taking players name
+		p[0]=document.getElementById("p1").value;
+		p[1]=document.getElementById("p2").value;
+
+		//taking their choices
+		var dp1=document.getElementById("p1c");
+		var dp2=document.getElementById("p2c");
+		pc[0]=dp1.options[dp1.selectedIndex].value;
+		pc[1]=dp1.options[dp2.selectedIndex].value;
+
+		//for blank input
+		if(p[0]==""||p[1]==""){
+			alert("Please fill all blank spaces");
+			return;
+		}
+
+		//changing display 
+		document.getElementById("start").style.display="none";
+		document.getElementById("board").style.display="block";
+
+		//print board
+		printboard(board);
+
+	}
+
+
+</script>
+</HTML>
