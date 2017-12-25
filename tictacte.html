@@ -10,7 +10,6 @@
 <h2>By:Gaurav</h2>
 </div>
 <div class="start" id="start">
-	<form>
 		<b>PLAYER 1</b> NAME:
 		<input type="text" id="p1" required>&nbsp;
 		  CHOICE:<select id="p1c">
@@ -29,33 +28,19 @@
 
 <div class="board" id="board" style="display: none;">
 	<p id="pturn"></p>
-	<button class="b" onclick="changencheck(id)"></button>
-	<button class="b" onclick="changencheck(id)"></button>
-	<button class="b" onclick="changencheck(id)"></button><br>
-	<button class="b" onclick="changencheck(id)"></button>
-	<button class="b" onclick="changencheck(id)"></button>
-	<button class="b" onclick="changencheck(id)"></button><br>
-	<button class="b" onclick="changencheck(id)"></button>
-	<button class="b" onclick="changencheck(id)"></button>
-	<button class="b" onclick="changencheck(id)"></button><br>
+	<button class="b" id="0" value="" onclick="changencheck(id)">&nbsp;</button>
+	<button class="b" id="1" value="" onclick="changencheck(id)">&nbsp;</button>
+	<button class="b" id="2" value="" onclick="changencheck(id)">&nbsp;</button><br>
+	<button class="b" id="3" value="" onclick="changencheck(id)">&nbsp;</button>
+	<button class="b" id="4" value="" onclick="changencheck(id)">&nbsp;</button>
+	<button class="b" id="5" value="" onclick="changencheck(id)">&nbsp;</button><br>
+	<button class="b" id="6" value="" onclick="changencheck(id)">&nbsp;</button>
+	<button class="b" id="7" value="" onclick="changencheck(id)">&nbsp;</button>
+	<button class="b" id="8" value="" onclick="changencheck(id)">&nbsp;</button><br>
 </div>
 
 <script type="text/javascript">
-	var p=[],pc=[],board=[];
-
-	//function fo printing board
-	function printboard(board){
-		var b=document.getElementsByClassName("b");
-		b[0].innerHTML=board[0];
-		b[1].innerHTML=board[1];
-		b[2].innerHTML=board[2];
-		b[3].innerHTML=board[3];
-		b[4].innerHTML=board[4];
-		b[5].innerHTML=board[5];
-		b[6].innerHTML=board[6];
-		b[7].innerHTML=board[7];
-		b[8].innerHTML=board[8];
-	}
+	var p=[],pc=[],board=[],i=0;
 
 	//fuction or player,choices and other stuffs
 	function players(){
@@ -77,12 +62,54 @@
 			return;
 		}
 
+
+		//checking that both choice are different
+		if(pc[0]==pc[1]){
+			alert("Choices should be different");
+			return;
+		}
+
+
 		//changing display 
 		document.getElementById("start").style.display="none";
 		document.getElementById("board").style.display="block";
+		document.getElementById("pturn").innerHTML=p[0]+"'s"+"&nbsp;"+"TURN :"
 
-		//print board
-		printboard(board);
+	}
+
+	//function for checking straight win
+	function checkstr(){
+		return false;
+	}
+
+	//function for checking slant win
+	function checkslt(){
+		return false;
+	}
+
+	//function for checking and changing after each step
+	function changencheck(id){
+		//checking whether clicked button in empty or not
+		var x=document.getElementById(id).value;
+		if(x!=""){
+			alert("Please make a valid step");
+			return;
+		}
+
+		//checking whose chance in this
+		var n=i%2,idn=parseInt(id);
+		board[idn]=pc[n];
+
+		//checking if that player is winning or not
+		if (checkstr(pc[n])||checkslt(pc[n])) {
+			return;
+		}
+
+		//changing element in box
+		document.getElementById(id).value=pc[n];
+		document.getElementById(id).innerHTML=pc[n];
+		document.getElementById("pturn").innerHTML=p[n]+"'s"+"&nbsp;"+"TURN :"
+		i=i+1;
 
 	}
 
