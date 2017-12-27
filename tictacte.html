@@ -2,37 +2,113 @@
 <HTML>
 <HEAD>
 	<meta charset="utf-8"/>
+	<link href='https://fonts.googleapis.com/css?family=Akronim' rel='stylesheet'>
 	<TITLE>Tic-Tac-Toe By:Gaurav</TITLE>
-	<style type="text/css"></style>
+	<style type="text/css">
+		body{
+			color: #222211;
+			margin: 0px;
+			text-align: center;
+			background-image: url("wood-background.jpg");
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+		.heading{
+			color: #4d0000;
+			border: 10px solid #1a0000;
+			border-radius: 20px;
+			padding: 4px;
+			font-family: 'Akronim';
+		}
+
+		h1{
+			font-size: 52px;
+		}
+		h2{
+			font-size: 30px;
+			text-align: right;
+		}
+
+		.start{
+			font-size: 26px;
+			border:3px solid #1a0000;
+			margin-left: 100px;
+			margin-right: 100px;
+			padding: 20px;
+			border-radius: 25px;
+		}
+		.stylelist{
+			font-size: 26px;
+			border: 1px solid black;
+			padding: 10px;
+			border-radius: 15px;
+			background-color: #cccc99;
+		}
+		.bstart{
+			font-size:26px;
+			width: 100%;
+			border: 2px solid darkgreen;
+			background-color: #cccc99;
+			border-radius: 15px;
+		}
+		button.bstart:hover{
+			background-color: darkgreen;
+		}
+
+		h5{
+			margin-top:-35px;
+			font-size: 30px;
+			background-color: #99994d;
+			border:2px solid #1a0000;
+			border-radius: 13px;
+		}
+
+		button.b{
+			font-size: 40px;
+			height: 100px;
+			width: 100px;
+			background-color: #cccc99;
+			border:3px solid #330000;
+		}
+		button.eb{
+			font-size: 20px;
+			background-color: #cccc99;
+			border:1px solid black;
+			border-radius: 5px;
+		}
+
+	</style>
 </HEAD>
-<div>
+<div class="heading">
 <h1>Tic-Tac-Toe</h1>
 <h2>By:Gaurav</h2>
 </div>
+<br><br>
 <div class="start" id="start">
+	<h5 class="topt">Player's Detail</h5>
 		<b>PLAYER 1</b> NAME:
-		<input type="text" id="p1" required>&nbsp;
-		  CHOICE:<select id="p1c">
+		<input type="text" id="p1" required class="stylelist">&nbsp;
+		  CHOICE:&nbsp;<select id="p1c" class="stylelist">
 			<option value="X">X</option>
 			<option value="O">O</option>
-		</select><br>
+		</select><br><br>
 		<b>PLAYER 2</b> NAME:
-		<input type="text" id="p2" required>&nbsp;
-		CHOICE:<select id="p2c">
+		<input type="text" id="p2" required class="stylelist">&nbsp;
+		CHOICE:&nbsp;<select id="p2c" class="stylelist">
 			<option value="X">X</option>
 			<option value="O">O</option>
-		</select><br>
-		<button  onclick="players()">Submit</button>
+		</select><br><br>
+		<button  onclick="players()" class="bstart">Submit</button>
 	</form>
 </div>
-<div id="amatch" style="display: none;">
+<div id="amatch" class="start" style="display: none;">
 	<p id="winner"></p>
 	Do you want to play again?<br>
-	<button onclick="location.reload()">YES</button>&nbsp;
-	<button onclick="window.close()">NO</button>
+	<button class="eb" onclick="location.reload()">YES</button>&nbsp;
+	<button class="eb" onclick="window.close()">NO</button>
 </div>
 
-<div class="board" id="board" style="display: none;">
+<div class="start" id="board" style="display: none;">
 	<p id="pturn"></p>
 	<button class="b" id="0" value="" onclick="changencheck(id)">&nbsp;</button>
 	<button class="b" id="1" value="" onclick="changencheck(id)">&nbsp;</button>
@@ -130,9 +206,17 @@
 		//checking if that player is winning or not
 		if (check(pc[n])) {
 			document.getElementById("amatch").style.display="block";
-			document.getElementById("winner").innerHTML=p[n]+" won the match."
+			document.getElementById("winner").innerHTML=p[n]+" won the match.";
 			document.getElementById(id).innerHTML=pc[n];
+			document.getElementById("pturn").style.display="none";
 			return;
+		}
+
+		//checking if no oe won the match
+		else if (i==8) {
+			document.getElementById("amatch").style.display="block";
+			document.getElementById("winner").innerHTML=" It's a Draw.";
+			document.getElementById("pturn").style.display="none";
 		}
 
 		//changing element in box
